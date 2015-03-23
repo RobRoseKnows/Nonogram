@@ -86,6 +86,6 @@ public class GameScreen extends Activity {
 			e.printStackTrace();
 		} // end try-catch
 		return gs;
-	}
+	} // end public int[][] readGrids
 
 }
