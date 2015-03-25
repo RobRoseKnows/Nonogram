@@ -10,6 +10,10 @@ import java.io.InputStreamReader;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
 
 public class GameScreen extends Activity {
 	private int[][] gridSolution;
@@ -21,7 +25,14 @@ public class GameScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
 		gridSolution = readGrids();
-		
+		GridView gameGrid = (GridView) findViewById(R.id.gameGridView);
+		gameGrid.setAdapter(new gameGridAdapter());
+		gameGrid.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
+				
+			}
+		});
 	}
 	
 	/**

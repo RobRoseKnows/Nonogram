@@ -8,13 +8,14 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
 
 public class CellDrawable extends ShapeDrawable {
-	Cell theCell;
-	float size;
-	int x;
+	private Cell theCell;
+	private float size;
+	private int x;
+	private int y;
 	
 	public CellDrawable(int r, int c, boolean wb, float s, int mx, int my) {
 		super();
-		theCell = new Cell(r, c, wb);
+		theCell = new Cell(r, c, wb, this);
 		size = s;
 		super.setPadding(3, 3, 3, 3);
 	}

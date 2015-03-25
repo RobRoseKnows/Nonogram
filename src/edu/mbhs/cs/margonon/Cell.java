@@ -6,13 +6,15 @@ public class Cell {
 	private boolean correctNow;
 	private int rowIndex = -1;
 	private int columnIndex = -1;
+	private CellDrawable cellDraw;
 	
-	public Cell(int ri, int ci, boolean willBe) {
+	public Cell(int ri, int ci, boolean willBe, CellDrawable cd) {
 		rowIndex = ri;
 		columnIndex = ci;
 		willBeFull = willBe;
 		display = 0;
 		correctNow = isCorrect();
+		cellDraw = cd;
 	} // end public Cell(int ri, int ci, boolean willBe)
 	
 	/**
