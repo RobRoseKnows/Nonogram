@@ -26,8 +26,10 @@ public final class R {
         public static final int title=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f090005;
+        public static final int action_settings=0x7f090007;
         public static final int gameGridView=0x7f090000;
+        public static final int gridButton=0x7f090005;
+        public static final int imageInGrid=0x7f090006;
         public static final int main_menu_title=0x7f090001;
         public static final int mm_instructions_button=0x7f090003;
         public static final int mm_settings_button=0x7f090004;
@@ -36,6 +38,7 @@ public final class R {
     public static final class layout {
         public static final int activity_game_screen=0x7f030000;
         public static final int activity_main_menu=0x7f030001;
+        public static final int button_grid_view=0x7f030002;
     }
     public static final class menu {
         public static final int game_screen=0x7f080000;

@@ -98,5 +98,13 @@ public class GameScreen extends Activity {
 		} // end try-catch
 		return gs;
 	} // end public int[][] readGrids
+	
+	private Cell[][] createCells()
+	{
+		Cell[][] c = new Cell[rows][cols];
+		
+		
+		return c;
+	} // end private Cell[][] createCells()
 
 }

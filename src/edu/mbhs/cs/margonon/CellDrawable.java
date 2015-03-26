@@ -1,4 +1,4 @@
-package edu.mbhs.cs.margonon;
+/*package edu.mbhs.cs.margonon;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -37,3 +37,4 @@ public class CellDrawable extends ShapeDrawable {
 		super.draw(arg0);
 	} // end public void draw(Canvas arg0)
 }
+*/
