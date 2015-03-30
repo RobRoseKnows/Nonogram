@@ -6,11 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -19,6 +22,7 @@ public class GameScreen extends Activity {
 	private int[][] gridSolution;
 	private int rows;
 	private int cols;
+	private List<Cell> cellList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,8 @@ public class GameScreen extends Activity {
 		setContentView(R.layout.activity_game_screen);
 		gridSolution = readGrids();
 		GridView gameGrid = (GridView) findViewById(R.id.gameGridView);
-		gameGrid.setAdapter(new gameGridAdapter());
+		gameGrid.setLayoutParams(new LayoutParams(rows, cols));
+		gameGrid.setAdapter(new gameGridAdapter(this, cellList));
 		gameGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
@@ -83,6 +88,10 @@ public class GameScreen extends Activity {
 					//TODO Handle what happens if the grid is bigger than what was originally specified.
 					try {
 						gs[on][i] = Integer.parseInt(lineStrings[i]);
+						if(gs[on][i] == 0)
+							cellList.add(new Cell(on, i, false));
+						else
+							cellList.add(new Cell(on, i, true));
 					} catch(NumberFormatException e) {
 						//TODO Add something to respond to the exception.
 					} // end try-catch

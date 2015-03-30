@@ -1,5 +1,7 @@
 package edu.mbhs.cs.margonon;
 
+import android.widget.ImageView;
+
 public class Cell {
 	private final boolean willBeFull; 
 	private int display = 0; // 0 = empty, 1 = filled, 2 = crossed out

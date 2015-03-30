@@ -15,7 +15,9 @@ public class gameGridAdapter extends BaseAdapter {
 	
 	public gameGridAdapter(Context context, List<Cell> cellsIn) {
 		mInflater = LayoutInflater.from(context);
-		cells = cellsIn;
+		//for(int i = 0; i < cellsIn.length; i++)
+			//for(int k = 0; k < cellsIn[0].length; k++)
+				//cells.add(cellsIn[i][k]);
 	}
 	
 	@Override
