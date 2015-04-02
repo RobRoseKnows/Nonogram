@@ -10,17 +10,17 @@
 
     <GridView
         android:id="@+id/gameGridView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="324dp"
+        android:layout_height="324dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:columnWidth="60dp"
+        android:columnWidth="48dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
-        android:numColumns="3"
-        android:padding="10dp"
+        android:numColumns="6"
+        android:padding="3dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" >
+        android:verticalSpacing="0dp" >
     </GridView>
 
 </RelativeLayout>
