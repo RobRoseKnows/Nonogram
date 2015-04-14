@@ -3,7 +3,7 @@ package edu.mbhs.cs.margonon;
 import android.widget.ImageView;
 
 public class Cell {
-	private final boolean willBeFull; 
+	private final boolean willBeFull;
 	private int display = 0; // 0 = empty, 1 = filled, 2 = crossed out
 	private boolean correctNow;
 	private int rowIndex = -1;
@@ -45,6 +45,14 @@ public class Cell {
 				return false;
 		} // end switch
 	} // end public boolean isCorrect()
+	
+	public void cycleNext()
+	{
+		if(display == 2)
+			display = 0;
+		else
+			display++;
+	}
 
 	/**
 	 * Getter function for the willBeFull variable.
