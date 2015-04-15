@@ -29,13 +29,14 @@ public class GameScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
 		gridSolution = readGrids();
-		GridView gameGrid = (GridView) findViewById(R.id.gameGridView);
+		final GridView gameGrid = (GridView) findViewById(R.id.gameGridView);
 		gameGrid.setLayoutParams(new LayoutParams(rows, cols));
-		gameGrid.setAdapter(new gameGridAdapter(this, cellList));
+		gameGrid.setAdapter(new gameGridAdapter(this, cellList, rows, cols));
 		gameGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-				cellList.get(position);
+				cellList.get(position).cycleNext();
+				gameGrid.invalidate();
 			}
 		});
 	}
