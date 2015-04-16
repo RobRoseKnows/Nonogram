@@ -11,6 +11,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -59,6 +60,7 @@ public class GameScreen extends Activity {
 			/* This do-while statement is a work around so that we can define the first two values without 
 			 * defining lineStrings and lineInts outside of a loop.
 			 */
+			/*
 			do {
 				lineStrings = line.split("\\s");
 				lineInts = new int[lineStrings.length];
@@ -74,21 +76,19 @@ public class GameScreen extends Activity {
 				rows = lineInts[1];
 			} while(false);
 			gs = new int[rows][cols];
+			*/
 			
 			/* This section of code is intended to read each line and plop it into the array.
 			 */
 			line = br.readLine();
 			//TODO Add in default values if no grid is found. (And line is therefore null)
-			int on = 0;
-			while(line != null)
-			{
-				//TODO Check to make sure the array is as big as the cols and rows values say it is.
-				lineStrings = line.split("\\s");
+			lineStrings = line.split("\\s");
 				//lineInts = new int[lineStrings.length];
 				for(int i = 0; i < lineStrings.length; i++) {
 					//TODO Handle what happens if the grid is bigger than what was originally specified.
 					try {
 						gs[on][i] = Integer.parseInt(lineStrings[i]);
+						Log.d("PARSING", (on + ", " + i + " = "  + gs[on][i]));
 						if(gs[on][i] == 0)
 							cellList.add(new Cell(on, i, false));
 						else

@@ -44,7 +44,6 @@ public class gameGridAdapter extends BaseAdapter {
 		View view;
 		if(convertView == null) {
 			view = mInflater.inflate(R.layout.button_grid_view, parent, false);
-			
 			ImageView imgView = (ImageView) view.findViewById(R.id.imageInGrid);
 			imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imgView.setPadding(4, 4, 4, 4);
