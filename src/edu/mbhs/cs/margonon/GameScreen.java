@@ -47,7 +47,7 @@ public class GameScreen extends Activity {
 	 * Currently it can only accept one grid.
 	 * TODO Make this function work for multiple puzzles (grids) in the file.
 	 * @return A 2D-array containing the solution for the grid.
-	 */
+	 *
 	public int[][] readGrids() {
 		int[][] gs;
 		InputStream is = getResources().openRawResource(R.raw.grids);
@@ -59,7 +59,7 @@ public class GameScreen extends Activity {
 			
 			/* This do-while statement is a work around so that we can define the first two values without 
 			 * defining lineStrings and lineInts outside of a loop.
-			 */
+			 *
 			/*
 			do {
 				lineStrings = line.split("\\s");
@@ -76,10 +76,10 @@ public class GameScreen extends Activity {
 				rows = lineInts[1];
 			} while(false);
 			gs = new int[rows][cols];
-			*/
+			*
 			
 			/* This section of code is intended to read each line and plop it into the array.
-			 */
+			 *
 			line = br.readLine();
 			//TODO Add in default values if no grid is found. (And line is therefore null)
 			lineStrings = line.split("\\s");
@@ -108,6 +108,16 @@ public class GameScreen extends Activity {
 		} // end try-catch
 		return gs;
 	} // end public int[][] readGrids
+	 */
+	
+	public List<Cell> createCellList()
+	{
+		List<Cell> cl;
+		InputStream is = getResources().openRawResource(R.raw.grids);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		
+		return cl;
+	}
 	
 	private Cell[][] createCells()
 	{
