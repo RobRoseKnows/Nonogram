@@ -1,5 +1,6 @@
 package edu.mbhs.cs.margonon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -10,12 +11,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+/**
+ * This is the adapter that draws the grid.
+ * 
+ * @author Robert Rose
+ */
 public class gameGridAdapter extends BaseAdapter {
-	private LayoutInflater mInflater;
-	private List<Cell> cells;
-	private int rows;
-	private int cols;
+	private LayoutInflater mInflater; // The inflater.
+	private List<Cell> cells = new ArrayList<Cell>(); // A list containing all the cell objects.
+	private int rows; // The number of rows.
+	private int cols; // The number of columns.
 	
+	/**
+	 * This is the constructor which takes the context, a list of cell objects and
+	 * the grid dimensions to create an adapter which will render the grid.
+	 * 
+	 * @param context Context passed in from another class.
+	 * @param cellsIn 
+	 * @param r
+	 * @param c
+	 */
 	public gameGridAdapter(Context context, List<Cell> cellsIn, int r, int c) {
 		mInflater = LayoutInflater.from(context);
 		for(int i = 0; i < rows; i++)

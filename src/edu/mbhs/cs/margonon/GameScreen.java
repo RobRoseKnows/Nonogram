@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -23,13 +24,15 @@ public class GameScreen extends Activity {
 	private int[][] gridSolution;
 	private int rows;
 	private int cols;
-	private List<Cell> cellList;
+	private List<Integer> solList = new ArrayList<Integer>();
+	private List<Cell> cellList = new ArrayList<Cell>();
+	private List<Boolean> solListBool = new ArrayList<Boolean>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
-		gridSolution = readGrids();
+		createCellList();
 		final GridView gameGrid = (GridView) findViewById(R.id.gameGridView);
 		gameGrid.setLayoutParams(new LayoutParams(rows, cols));
 		gameGrid.setAdapter(new gameGridAdapter(this, cellList, rows, cols));
@@ -60,7 +63,7 @@ public class GameScreen extends Activity {
 			/* This do-while statement is a work around so that we can define the first two values without 
 			 * defining lineStrings and lineInts outside of a loop.
 			 *
-			/*
+			 *
 			do {
 				lineStrings = line.split("\\s");
 				lineInts = new int[lineStrings.length];
@@ -108,23 +111,53 @@ public class GameScreen extends Activity {
 		} // end try-catch
 		return gs;
 	} // end public int[][] readGrids
-	 */
-	
-	public List<Cell> createCellList()
+	 */	
+	public void createCellList()
 	{
 		List<Cell> cl;
 		InputStream is = getResources().openRawResource(R.raw.grids);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String[] lineStrings;
+		int[] lineInts;
+		String puzzleText = "";
 		
-		return cl;
+		try {
+			puzzleText = br.readLine();
+			lineStrings = puzzleText.split("\\s");
+			lineInts = new int[lineStrings.length - 2];
+			System.out.println(puzzleText);
+			System.out.println(lineStrings.length);
+			
+			for(int i = 0; i < lineStrings.length; i++)
+			{
+				if(i == 0) {
+					cols = Integer.parseInt(lineStrings[i]);
+					continue;
+				} else if(i == 1) {
+					rows = Integer.parseInt(lineStrings[i]);
+					continue;
+				} else {
+					lineInts[i-2] = Integer.parseInt(lineStrings[i]);
+					System.out.println(i + " " + lineInts[i-2]);
+					solList.add(lineInts[i-2]);
+					if(solList.get(i-2) == 1)
+						solListBool.add(true);
+					else
+						solListBool.add(false);
+				}
+			}
+			
+			gridSolution = new int[rows][cols];
+			
+			for(int i = 0; i < lineInts.length; i++)
+			{
+				int y = i/cols;
+				int x = i - y * cols;
+				System.out.println("i=" + i + ", x=" + x + ", y=" + y);
+				gridSolution[y][x] = lineInts[i];
+				cellList.add(new Cell(x, y, solListBool.get(i)));
+			}
+		} catch (IOException e) {e.printStackTrace();}
+		
 	}
-	
-	private Cell[][] createCells()
-	{
-		Cell[][] c = new Cell[rows][cols];
-		
-		
-		return c;
-	} // end private Cell[][] createCells()
-
 }

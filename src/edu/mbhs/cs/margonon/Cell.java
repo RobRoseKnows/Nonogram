@@ -2,14 +2,29 @@ package edu.mbhs.cs.margonon;
 
 import android.widget.ImageView;
 
+/**
+ * This is the cell object for the nonogram program. Each cell has its on cell
+ * object that holds what the current status of the cell is.
+ * 
+ * @author Robert Rose
+ */
 public class Cell {
-	private final boolean willBeFull;
+	private final boolean willBeFull; // Whether the cell will be full (true) or not (false)
 	private int display = 0; // 0 = empty, 1 = filled, 2 = crossed out
-	private boolean correctNow;
-	private int rowIndex = -1;
-	private int columnIndex = -1;
+	private boolean correctNow; // Whether the cell is currently in its correct state.
+	private int rowIndex = -1; // The row on which this cell is located.
+	private int columnIndex = -1; // The column on which this cell is located.
 	private ImageView iv;
 	
+	/**
+	 * This is the primary constructor that takes a row index and a column index and
+	 * creates a cell with the value based on a boolean value.
+	 * 
+	 * @param ri		Row on which the cell lies.
+	 * @param ci		Column on which the cell lies.
+	 * @param willBe	Whether cell will be full or whether it is empty true = 
+	 * 					full, false = empty.
+	 */
 	public Cell(int ri, int ci, boolean willBe) {
 		rowIndex = ri;
 		columnIndex = ci;
@@ -17,6 +32,29 @@ public class Cell {
 		display = 0;
 		correctNow = isCorrect();
 	} // end public Cell(int ri, int ci, boolean willBe)
+	
+	/**
+	 * This is an identical constructor to the one above, but can take an int instead
+	 * of a boolean value.
+	 * 
+	 * @param ri 		Row on which the cell lies.
+	 * @param ci 		Column on which the cell lies.
+	 * @param willBe 	Whether cell will be full or whether it is empty. 1 = full 
+	 * 					(true), 0 = empty (false).
+	 * 					
+	 */
+	public Cell(int ri, int ci, int willBe) {
+		boolean b;
+		if(willBe == 1)
+			b = true;
+		else
+			b = false;
+		rowIndex = ri;
+		columnIndex = ci;
+		willBeFull = b;
+		display = 0;
+		correctNow = isCorrect();
+	}
 	
 	/**
 	 * Called to determine whether the current status of the cell is correct.
