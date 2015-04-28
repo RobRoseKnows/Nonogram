@@ -74,7 +74,7 @@ public class gameGridAdapter extends BaseAdapter {
 					imgView.setImageResource(R.drawable.cross);
 					break;
 				default:
-					Log.d("DRAWING", "display was set to invalid state");
+					Log.e("DRAWING", "display was set to invalid state");
 			} // end switch;
 			
 		} else {

@@ -84,6 +84,9 @@ public class Cell {
 		} // end switch
 	} // end public boolean isCorrect()
 	
+	/**
+	 * Cycles the display variabble between different states.
+	 */
 	public void cycleNext()
 	{
 		if(display == 2)
