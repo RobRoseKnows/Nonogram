@@ -1,5 +1,6 @@
 package edu.mbhs.cs.margonon;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -31,6 +32,7 @@ public class Cell {
 		willBeFull = willBe;
 		display = 0;
 		correctNow = isCorrect();
+		Log.d( "CELL_CREATION", "Cell created (" + ci + ", " + ri + ") = " + willBe);
 	} // end public Cell(int ri, int ci, boolean willBe)
 	
 	/**

@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.AdapterView;
@@ -22,14 +23,16 @@ public class GameScreen extends Activity {
 	private List<Integer> solList = new ArrayList<Integer>();
 	private List<Cell> cellList = new ArrayList<Cell>();
 	private List<Boolean> solListBool = new ArrayList<Boolean>();
+	private GridView gameGrid;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
 		createCellList();
-		final GridView gameGrid = (GridView) findViewById(R.id.gameGridView);
-		gameGrid.setLayoutParams(new LayoutParams(rows, cols));
+		//Log.d("rendergrid", "Starting gameGrid stuff." + cellList.get(0).getDisplay());
+		gameGrid = (GridView) findViewById(R.id.gameGridView);
+		//gameGrid.setLayoutParams(new LayoutParams(rows, cols));
 		gameGrid.setAdapter(new gameGridAdapter(this, cellList, rows, cols));
 		gameGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -65,7 +68,7 @@ public class GameScreen extends Activity {
 		lvh = new LineValueHolder(lineStrings, lineInts);
 	
 		putPuzzleInList(lvh);
-		System.out.println("lvh: " + lvh.lineInts);
+		// System.out.println("lvh: " + lvh.lineInts.toString());
 		
 		gridSolution = new int[rows][cols];
 			
@@ -116,6 +119,11 @@ public class GameScreen extends Activity {
 		{
 			lineStrings = ls;
 			lineInts = li;
+		}
+		
+		public String toString()
+		{
+			return "LS: " + lineStrings + ", LI: " + lineInts;
 		}
 	}
 }

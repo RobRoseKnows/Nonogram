@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 /**
@@ -60,6 +61,7 @@ public class gameGridAdapter extends BaseAdapter {
 		if(convertView == null) {
 			view = mInflater.inflate(R.layout.button_grid_view, parent, false);
 			ImageView imgView = (ImageView) view.findViewById(R.id.imageInGrid);
+			//ImageView imgView = new ImageView(null);
 			imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imgView.setPadding(4, 4, 4, 4);
 			switch(cells.get(position).getDisplay())
@@ -76,7 +78,8 @@ public class gameGridAdapter extends BaseAdapter {
 				default:
 					Log.e("DRAWING", "display was set to invalid state");
 			} // end switch;
-			
+			//imgView.setLayoutParams(new GridView.LayoutParams(250,250));
+			view = imgView;
 		} else {
 			view = convertView;
 		} // end if
@@ -86,4 +89,6 @@ public class gameGridAdapter extends BaseAdapter {
 	}
 	//TODO http://ocddevelopers.com/2014/extend-baseadapter-instead-of-arrayadapter-for-custom-list-items/
 	//TODO http://stackoverflow.com/questions/5046320/a-grid-layout-of-icon-text-buttons
+	//TODO http://androidexample.com/Grid_Layout_-_Android_Example/index.php?view=article_discription&aid=75&aaid=99
+	//TODO http://androidexample.com/Custom_Grid_Layout_-_Android_Example/index.php?view=article_discription&aid=76&aaid=100
 }
