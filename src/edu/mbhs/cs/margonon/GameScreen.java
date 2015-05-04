@@ -38,6 +38,7 @@ public class GameScreen extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 				cellList.get(position).cycleNext();
+				Log.i("gameGrid Click Listener", "Cell clicked" + position);
 				gameGrid.invalidate();
 			}
 		});
