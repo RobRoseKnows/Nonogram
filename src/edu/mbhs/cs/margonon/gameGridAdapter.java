@@ -80,7 +80,7 @@ public class gameGridAdapter extends BaseAdapter {
 				default:
 					Log.e("DRAWING", "display was set to invalid state");
 			} // end switch;
-			//imgView.setLayoutParams(new GridView.LayoutParams(250,250));
+			imgView.setLayoutParams(new GridView.LayoutParams(48,48));
 			view = imgView;
 		} else {
 			view = convertView;
