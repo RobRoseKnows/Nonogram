@@ -41,11 +41,11 @@ public class GameScreen extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 				Cell cellClicked = (Cell) gameGrid.getAdapter().getItem(position);
-				Log.d("ITEM_CLICK","Position: " + position + " Value: " + cellList.get(position) + " & " + cellClicked);
+				//Log.d("ITEM_CLICK","Position: " + position + " Value: " + cellList.get(position) + " & " + cellClicked);
 				cellClicked.cycleNext();
-				Log.d("ITEM_CLICK", "Cell clicked: " + position);
-				Log.d("ITEM_CLICK", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + cellClicked.getDisplay());
-				findViewById(R.id.gameGridView).postInvalidate(); // TODO Fix rendering
+				//Log.d("ITEM_CLICK", "Cell clicked: " + position);
+				//Log.d("ITEM_CLICK", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + cellClicked.getDisplay());
+				parent.getChildAt(position).postInvalidate(); // TODO Fix rendering
 			}
 		});
 	}
