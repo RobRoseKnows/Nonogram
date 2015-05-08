@@ -85,7 +85,7 @@ public class gameGridAdapter extends BaseAdapter {
 		} else {
 			view = convertView;
 		} // end if
-		
+		Log.d("getView","getView called position: " + position);
 		
 		return view;
 	}
