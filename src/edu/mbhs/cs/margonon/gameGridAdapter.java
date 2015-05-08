@@ -36,9 +36,13 @@ public class GameGridAdapter extends BaseAdapter {
 		mInflater = LayoutInflater.from(context);
 		rows = r;
 		cols = c;
-		for(int i = 0; i < rows; i++)
-			for(int k = 0; k < cols; k++)
-				cells.add(cellsIn.get(i*(cols - 1) + k));
+		for(int i = 0; i < rows*cols; i++)
+			cells.add(cellsIn.get(i));
+		
+		String debugOut = "";
+		for(int i = 0; i < cells.size(); i++)
+			debugOut += (cells.get(i).getDisplay() + " " + cells.get(i).getWillBeFull() + ", ");
+		Log.d("GAME_GRID_ADAPTER", debugOut);
 	}
 	
 	@Override
@@ -57,6 +61,10 @@ public class GameGridAdapter extends BaseAdapter {
 		return position;
 	}
 	
+	public List<Cell> getCells(int position) {
+		return cells;
+	}
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view;
@@ -66,6 +74,7 @@ public class GameGridAdapter extends BaseAdapter {
 			//ImageView imgView = new ImageView(null);
 			imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imgView.setPadding(4, 4, 4, 4);
+			Log.i("GET_VIEW","getView called position: " + position);
 			switch(cells.get(position).getDisplay())
 			{
 				case 0:
@@ -85,7 +94,6 @@ public class GameGridAdapter extends BaseAdapter {
 		} else {
 			view = convertView;
 		} // end if
-		Log.d("getView","getView called position: " + position);
 		
 		return view;
 	}

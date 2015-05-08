@@ -29,20 +29,23 @@ public class GameScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
-		createCellList();
-		//Log.d("rendergrid", "Starting gameGrid stuff." + cellList.get(0).getDisplay());
+		createCellList(); // I'm wondering if the problem has to do with the way it's putting the values into cellList.
 		gameGrid = (GridView) findViewById(R.id.gameGridView);
-		//gameGrid.setLayoutParams(new LayoutParams(rows, cols));
 		GameGridAdapter gameGridA = new GameGridAdapter(this, cellList, rows, cols);
 		gameGrid.setAdapter(gameGridA);
+		String debugOut = "";
+		for(int i = 0; i < cellList.size(); i++)
+			debugOut += (cellList.get(i).getDisplay() + " " + cellList.get(i).getWillBeFull() + ", ");
+		//Log.d("ON_CREATE", debugOut); // I'm going to look at cellList and figure it out.
 		gameGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
-				Log.i("ITEM_CLICK","Position: " + position)
-				cellList.get(position).cycleNext();
-				Log.i("gameGrid Click Listener", "Cell clicked: " + position);
-				Log.i("gameGrid Click Listener", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + ((Cell) gameGrid.getAdapter().getItem(position)).getDisplay());
-				findViewById(R.id.gameGridView).postInvalidate();
+				Cell cellClicked = (Cell) gameGrid.getAdapter().getItem(position);
+				Log.d("ITEM_CLICK","Position: " + position + " Value: " + cellList.get(position) + " & " + cellClicked);
+				cellClicked.cycleNext();
+				Log.d("ITEM_CLICK", "Cell clicked: " + position);
+				Log.d("ITEM_CLICK", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + cellClicked.getDisplay());
+				findViewById(R.id.gameGridView).postInvalidate(); // TODO Fix rendering
 			}
 		});
 	}
