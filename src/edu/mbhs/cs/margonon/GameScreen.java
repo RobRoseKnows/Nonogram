@@ -33,12 +33,15 @@ public class GameScreen extends Activity {
 		//Log.d("rendergrid", "Starting gameGrid stuff." + cellList.get(0).getDisplay());
 		gameGrid = (GridView) findViewById(R.id.gameGridView);
 		//gameGrid.setLayoutParams(new LayoutParams(rows, cols));
-		gameGrid.setAdapter(new gameGridAdapter(this, cellList, rows, cols));
+		GameGridAdapter gameGridA = new GameGridAdapter(this, cellList, rows, cols);
+		gameGrid.setAdapter(gameGridA);
 		gameGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
+				Log.i("ITEM_CLICK","Position: " + position)
 				cellList.get(position).cycleNext();
-				Log.i("gameGrid Click Listener", "Cell clicked" + position);
+				Log.i("gameGrid Click Listener", "Cell clicked: " + position);
+				Log.i("gameGrid Click Listener", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + ((Cell) gameGrid.getAdapter().getItem(position)).getDisplay());
 				findViewById(R.id.gameGridView).postInvalidate();
 			}
 		});

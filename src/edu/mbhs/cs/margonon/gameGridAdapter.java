@@ -17,7 +17,7 @@ import android.widget.ImageView;
  * 
  * @author Robert Rose
  */
-public class gameGridAdapter extends BaseAdapter {
+public class GameGridAdapter extends BaseAdapter {
 	private LayoutInflater mInflater; // The inflater.
 	private List<Cell> cells = new ArrayList<Cell>(); // A list containing all the cell objects.
 	private int rows; // The number of rows.
@@ -32,7 +32,7 @@ public class gameGridAdapter extends BaseAdapter {
 	 * @param r
 	 * @param c
 	 */
-	public gameGridAdapter(Context context, List<Cell> cellsIn, int r, int c) {
+	public GameGridAdapter(Context context, List<Cell> cellsIn, int r, int c) {
 		mInflater = LayoutInflater.from(context);
 		rows = r;
 		cols = c;
