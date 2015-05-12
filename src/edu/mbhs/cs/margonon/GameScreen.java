@@ -35,53 +35,50 @@ public class GameScreen extends Activity {
 		gameGrid = (GridView) findViewById(R.id.gameGridView);
 		GameGridAdapter gameGridA = new GameGridAdapter(this, cellList, rows, cols);
 		gameGrid.setAdapter(gameGridA);
-		String debugOut = "";
-		for(int i = 0; i < cellList.size(); i++)
-			debugOut += (cellList.get(i).getDisplay() + " " + cellList.get(i).getWillBeFull() + ", ");
-		//Log.d("ON_CREATE", debugOut); // I'm going to look at cellList and figure it out.
 		gameGrid.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 				Cell cellClicked = (Cell) gameGrid.getAdapter().getItem(position);
-				//Log.d("ITEM_CLICK","Position: " + position + " Value: " + cellList.get(position) + " & " + cellClicked);
 				cellClicked.cycleNext();
-				//Log.d("ITEM_CLICK", "Cell clicked: " + position);
-				//Log.d("ITEM_CLICK", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + cellClicked.getDisplay());
-				//parent.getChildAt(position).postInvalidate(); // TODO Fix rendering
-				
-				//Thread changeGridThread = new Thread(new ModDataLLParser(gameGrid));
-				//changeGridThread.start();
-				
-				final int position2 = position;
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						ImageView runningImg = (ImageView) gameGrid.getChildAt(position2);
-						switch(((Cell) gameGrid.getAdapter().getItem(position2)).getDisplay())
-						{
-							case 0:
-								runningImg.setImageResource(R.drawable.white);
-								break;
-							case 1:
-								runningImg.setImageResource(R.drawable.colored);
-								break;
-							case 2:
-								runningImg.setImageResource(R.drawable.cross);
-								break;
-							default:
-								Log.e("DRAWING", "display was set to invalid state");
-						} // end switch;
-						Log.d("RUN_ON_UI_THREAD", "Redrawing..? " + position2);
-						runningImg.invalidate();
-					}					
-				});
+				refreshImageView(position);
 			}
 		});
 	}
 	
 	/**
+	 * This god damned function took forever to create and triggers the ImageView within
+	 * gameGrid to redraw.
+	 * @param pos The position of the users click.
+	 */
+	public void refreshImageView(final int pos){
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				ImageView runningImg = (ImageView) gameGrid.getChildAt(pos);
+				switch(((Cell) gameGrid.getAdapter().getItem(pos)).getDisplay())
+				{
+					case 0:
+						runningImg.setImageResource(R.drawable.white);
+						break;
+					case 1:
+						runningImg.setImageResource(R.drawable.colored);
+						break;
+					case 2:
+						runningImg.setImageResource(R.drawable.cross);
+						break;
+					default:
+						Log.e("DRAWING", "display was set to invalid state");
+				} // end switch;
+				runningImg.invalidate();
+			}					
+		});
+	}
+	
+	
+	/**
 	 * This function takes the data from the raw resource grids.txt and puts it in a 2D array.
 	 * Currently limited to accepting one grid within the grids.txt file.
+	 * TODO Make it accept more than one grid sometime over the summer.
 	 */
 	public void createCellList()
 	{
@@ -102,12 +99,20 @@ public class GameScreen extends Activity {
 		lineStrings = puzzleText.split("\\s");
 		lineInts = new int[lineStrings.length - 2];
 		lvh = new LineValueHolder(lineStrings, lineInts);
-	
-		putPuzzleInList(lvh);
-		// System.out.println("lvh: " + lvh.lineInts.toString());
 		
+		putPuzzleInList(lvh);
+		createCellList(lvh);
+	}
+	
+	/**
+	 * Creates a Cell object for each cell in the grid and puts them into the ArrayList
+	 * solListBool. It also puts the integer values of each Cell and puts them into the 
+	 * 2D-array gridSolution.
+	 * @param lvh
+	 */
+	private void createCellList(LineValueHolder lvh){
 		gridSolution = new int[rows][cols];
-			
+		
 		for(int i = 0; i < lvh.lineInts.length; i++)
 		{
 			int y = i/cols;
@@ -115,7 +120,6 @@ public class GameScreen extends Activity {
 			gridSolution[y][x] = lvh.lineInts[i];
 			cellList.add(new Cell(x, y, solListBool.get(i)));
 		}
-		
 	}
 	
 	/**
@@ -125,7 +129,7 @@ public class GameScreen extends Activity {
 	 * puts them in an array of integers held in LineValueHolder. Method also adds 
 	 * @param lvh
 	 */
-	public void putPuzzleInList(LineValueHolder lvh)
+	private void putPuzzleInList(LineValueHolder lvh)
 	{
 		for(int i = 0; i < lvh.lineStrings.length; i++)
 		{

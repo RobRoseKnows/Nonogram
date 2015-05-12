@@ -32,7 +32,6 @@ public class Cell {
 		willBeFull = willBe;
 		display = 0;
 		correctNow = isCorrect();
-		Log.d( "Cell Constructor", "Cell created (" + ci + ", " + ri + ") = " + willBe);
 	} // end public Cell(int ri, int ci, boolean willBe)
 	
 	/**

@@ -40,11 +40,6 @@ public class GameGridAdapter extends BaseAdapter {
 		mContext = context;
 		for(int i = 0; i < rows*cols; i++)
 			cells.add(cellsIn.get(i));
-		
-		String debugOut = "";
-		for(int i = 0; i < cells.size(); i++)
-			debugOut += (cells.get(i).getDisplay() + " " + cells.get(i).getWillBeFull() + ", ");
-		Log.d("GAME_GRID_ADAPTER", debugOut);
 	}
 	
 	@Override
@@ -70,10 +65,7 @@ public class GameGridAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView view;
-		Log.d("GET_VIEW","getView called position: " + position);
-		Log.d("GET_VIEW", "ConvertView: " + convertView);
 		if(convertView == null) {
-			//view = mInflater.inflate(R.layout.button_grid_view, parent, false);
 			view = new ImageView(mContext);
 			view.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			view.setPadding(4, 4, 4, 4);
