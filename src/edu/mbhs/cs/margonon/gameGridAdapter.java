@@ -22,6 +22,7 @@ public class GameGridAdapter extends BaseAdapter {
 	private List<Cell> cells = new ArrayList<Cell>(); // A list containing all the cell objects.
 	private int rows; // The number of rows.
 	private int cols; // The number of columns.
+	private Context mContext;
 	
 	/**
 	 * This is the constructor which takes the context, a list of cell objects and
@@ -36,6 +37,7 @@ public class GameGridAdapter extends BaseAdapter {
 		mInflater = LayoutInflater.from(context);
 		rows = r;
 		cols = c;
+		mContext = context;
 		for(int i = 0; i < rows*cols; i++)
 			cells.add(cellsIn.get(i));
 		
@@ -67,34 +69,33 @@ public class GameGridAdapter extends BaseAdapter {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view;
+		ImageView view;
+		Log.d("GET_VIEW","getView called position: " + position);
+		Log.d("GET_VIEW", "ConvertView: " + convertView);
 		if(convertView == null) {
-			view = mInflater.inflate(R.layout.button_grid_view, parent, false);
-			ImageView imgView = (ImageView) view.findViewById(R.id.imageInGrid);
-			//ImageView imgView = new ImageView(null);
-			imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			imgView.setPadding(4, 4, 4, 4);
-			Log.i("GET_VIEW","getView called position: " + position);
-			switch(cells.get(position).getDisplay())
-			{
-				case 0:
-					imgView.setImageResource(R.drawable.white);
-					break;
-				case 1:
-					imgView.setImageResource(R.drawable.colored);
-					break;
-				case 2:
-					imgView.setImageResource(R.drawable.cross);
-					break;
-				default:
-					Log.e("DRAWING", "display was set to invalid state");
-			} // end switch;
-			imgView.setLayoutParams(new GridView.LayoutParams(48,48));
-			view = imgView;
+			//view = mInflater.inflate(R.layout.button_grid_view, parent, false);
+			view = new ImageView(mContext);
+			view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+			view.setPadding(4, 4, 4, 4);
+			view.setLayoutParams(new GridView.LayoutParams(48,48));
 		} else {
-			view = convertView;
+			view = (ImageView) convertView;
 		} // end if
 		
+		switch(((Cell) getItem(position)).getDisplay())
+		{
+			case 0:
+				view.setImageResource(R.drawable.white);
+				break;
+			case 1:
+				view.setImageResource(R.drawable.colored);
+				break;
+			case 2:
+				view.setImageResource(R.drawable.cross);
+				break;
+			default:
+				Log.e("DRAWING", "display was set to invalid state");
+		} // end switch;
 		return view;
 	}
 	//TODO http://ocddevelopers.com/2014/extend-baseadapter-instead-of-arrayadapter-for-custom-list-items/

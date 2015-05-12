@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -45,7 +46,9 @@ public class GameScreen extends Activity {
 				cellClicked.cycleNext();
 				//Log.d("ITEM_CLICK", "Cell clicked: " + position);
 				//Log.d("ITEM_CLICK", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + cellClicked.getDisplay());
-				parent.getChildAt(position).postInvalidate(); // TODO Fix rendering
+				//parent.getChildAt(position).postInvalidate(); // TODO Fix rendering
+				Thread changeGridThread = new Thread(new ModDataLLParser(gameGrid));
+				changeGridThread.start();
 			}
 		});
 	}
