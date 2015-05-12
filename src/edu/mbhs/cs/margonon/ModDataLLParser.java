@@ -21,7 +21,7 @@ public class ModDataLLParser implements Runnable {
 	}
 	
 	public void resetDataCell(ImageView x) {
-		x.invalidate();
+		x.postInvalidate();
 	}
 	
 	public void parseLayoutEntity(Object le) {
