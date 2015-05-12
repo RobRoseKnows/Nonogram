@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.AdapterView;
@@ -47,8 +48,33 @@ public class GameScreen extends Activity {
 				//Log.d("ITEM_CLICK", "Cell clicked: " + position);
 				//Log.d("ITEM_CLICK", "Should Display: " + cellList.get(position).getDisplay() + ", Cell display: " + cellClicked.getDisplay());
 				//parent.getChildAt(position).postInvalidate(); // TODO Fix rendering
-				Thread changeGridThread = new Thread(new ModDataLLParser(gameGrid));
-				changeGridThread.start();
+				
+				//Thread changeGridThread = new Thread(new ModDataLLParser(gameGrid));
+				//changeGridThread.start();
+				
+				final int position2 = position;
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						ImageView runningImg = (ImageView) gameGrid.getChildAt(position2);
+						switch(((Cell) gameGrid.getAdapter().getItem(position2)).getDisplay())
+						{
+							case 0:
+								runningImg.setImageResource(R.drawable.white);
+								break;
+							case 1:
+								runningImg.setImageResource(R.drawable.colored);
+								break;
+							case 2:
+								runningImg.setImageResource(R.drawable.cross);
+								break;
+							default:
+								Log.e("DRAWING", "display was set to invalid state");
+						} // end switch;
+						Log.d("RUN_ON_UI_THREAD", "Redrawing..? " + position2);
+						runningImg.invalidate();
+					}					
+				});
 			}
 		});
 	}

@@ -21,7 +21,7 @@ public class ModDataLLParser implements Runnable {
 	}
 	
 	public void resetDataCell(ImageView x) {
-		x.postInvalidate();
+		x.invalidate();
 	}
 	
 	public void parseLayoutEntity(Object le) {
@@ -38,7 +38,7 @@ public class ModDataLLParser implements Runnable {
 				  // is desired, then the code can be modified to suit here. (But remember
 				  // this is not the UI thread so it cannot modify the object directly.)
 					Log.d("THREAD_DO_WORK", "" + v);
-					resetDataCell((ImageView) v);
+					v.invalidate();
 				}
 				else parseLayoutEntity(v);
 			}
