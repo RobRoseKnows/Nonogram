@@ -11,27 +11,36 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
 
 public class GameScreen extends Activity {
 	private int[][] gridSolution;
 	private int rows;
 	private int cols;
+	
 	private List<Integer> solList = new ArrayList<Integer>();
 	private List<Cell> cellList = new ArrayList<Cell>();
 	private List<Boolean> solListBool = new ArrayList<Boolean>();
+	
 	private GridView gameGrid;
+	
+	private String verHint = "";
+	private String horHint = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
 		createCellList(); // I'm wondering if the problem has to do with the way it's putting the values into cellList.
+		createHints();
+		
 		gameGrid = (GridView) findViewById(R.id.gameGridView);
 		GameGridAdapter gameGridA = new GameGridAdapter(this, cellList, rows, cols);
 		gameGrid.setAdapter(gameGridA);
@@ -44,6 +53,58 @@ public class GameScreen extends Activity {
 			}
 		});
 	}
+	
+	public void createHints() {
+		String vh = "";
+		String hh = "";
+		
+		
+		if(gridSolution == null) { return; }
+		
+		for(int y = 0; y < gridSolution.length; y++) {
+			vh += "( ";
+			int cummulative = 0;
+			for(int x = 0; x < gridSolution[y].length; x++) {
+				cummulative += gridSolution[y][x];
+				if(gridSolution[y][x] == 0 && cummulative > 0) {
+					vh += cummulative + " ";
+					cummulative = 0;
+				}
+			}
+			vh += ")\n\n";
+		}
+		verHint = vh;
+		horHint = hh;
+		
+		TextView vview = (TextView) findViewById(R.id.verticalHint);
+		TextView hview = (TextView) findViewById(R.id.horizontalHint);
+		
+		vview.setText(vh);
+		hview.setText(hh);
+	}
+	
+	/**
+	 * Function is in response to players clicking the checkAnswer button. It runs
+	 * through all the cells in cellList and checks to see if they are all solved
+	 * correctly. If they are, it sets the text of the button to "Correct!". If not,
+	 * it sets it to "Incorrect!".
+	 * @param v The button clicked.
+	 */
+	public void checkAnswerClick(View v) {
+		boolean isCorrect = true;
+		for(int i = 0; i < cellList.size(); i++) {
+			isCorrect = isCorrect && cellList.get(i).getCorrectNow();
+		}
+		
+		Button bv = (Button) v;
+		if(isCorrect) {
+			Log.i("BUTTON_CLICK", "Puzzle is correctly solved!");
+			bv.setText("Correct!");
+		} else {
+			Log.i("BUTTON_CLICK", "Puzzle is not solved!");
+			bv.setText("Incorrect! Click to check again!");
+		}
+	} // end public void checkAnswerClick(View v)
 	
 	/**
 	 * This god damned function took forever to create and triggers the ImageView within

@@ -94,6 +94,7 @@ public class Cell {
 			display = 0;
 		else
 			display++;
+		correctNow = isCorrect();
 	}
 
 	/**

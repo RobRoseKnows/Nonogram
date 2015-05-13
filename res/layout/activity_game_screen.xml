@@ -21,4 +21,34 @@
         android:stretchMode="columnWidth" >
     </GridView>
 
+    <Button
+        android:id="@+id/check_correct_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horizontalHint"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:onClick="checkAnswerClick"
+        android:text="Check Solution!" />
+
+    <TextView
+        android:id="@+id/horizontalHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gameGridView"
+        android:layout_alignRight="@+id/gameGridView"
+        android:layout_below="@+id/gameGridView"
+        android:text="Hint"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/verticalHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/horizontalHint"
+        android:layout_alignRight="@+id/gameGridView"
+        android:layout_alignTop="@+id/gameGridView"
+        android:text="H\ni\nn\nt"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </RelativeLayout>
