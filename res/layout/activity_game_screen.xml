@@ -41,12 +41,14 @@
         android:text="Hint"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/verticalHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/gameGridView"        
         android:layout_alignTop="@+id/gameGridView"
-        android:layout_toRightOf="@+id/gameGridView"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:text="H\ni\nn\nt"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textSize="32sp"/>
 
 </RelativeLayout>

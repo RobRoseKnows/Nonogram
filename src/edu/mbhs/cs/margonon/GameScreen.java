@@ -55,7 +55,7 @@ public class GameScreen extends Activity {
 	}
 	
 	public void createHints() {
-		/*
+		
 		String vh = "";
 		String hh = "";
 		
@@ -68,7 +68,7 @@ public class GameScreen extends Activity {
 		 * 1 1 0 0 0 
 		 * 0 1 1 1 1 
 		 * 0 1 1 0 1
-		 *
+		 */
 		
 		for(int y = 0; y < gridSolution.length; y++) {
 			vh += "(";
@@ -93,7 +93,7 @@ public class GameScreen extends Activity {
 		
 		vview.setLines(rows);
 		vview.setText(vh);
-		hview.setText(hh);*/
+		hview.setText(hh);
 	}
 	
 	/**
