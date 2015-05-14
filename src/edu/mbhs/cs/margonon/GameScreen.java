@@ -55,23 +55,35 @@ public class GameScreen extends Activity {
 	}
 	
 	public void createHints() {
+		/*
 		String vh = "";
 		String hh = "";
 		
 		
 		if(gridSolution == null) { return; }
 		
+		/*
+		 * 1 0 1 0 1 
+		 * 0 1 1 0 0 
+		 * 1 1 0 0 0 
+		 * 0 1 1 1 1 
+		 * 0 1 1 0 1
+		 *
+		
 		for(int y = 0; y < gridSolution.length; y++) {
-			vh += "( ";
+			vh += "(";
 			int cummulative = 0;
 			for(int x = 0; x < gridSolution[y].length; x++) {
 				cummulative += gridSolution[y][x];
 				if(gridSolution[y][x] == 0 && cummulative > 0) {
-					vh += cummulative + " ";
+					vh += " " + cummulative + ", ";
 					cummulative = 0;
 				}
 			}
-			vh += ")\n\n";
+			if(cummulative > 0){
+				vh += " " + cummulative + ", ";
+			}
+			vh += ")\n";
 		}
 		verHint = vh;
 		horHint = hh;
@@ -79,8 +91,9 @@ public class GameScreen extends Activity {
 		TextView vview = (TextView) findViewById(R.id.verticalHint);
 		TextView hview = (TextView) findViewById(R.id.horizontalHint);
 		
+		vview.setLines(rows);
 		vview.setText(vh);
-		hview.setText(hh);
+		hview.setText(hh);*/
 	}
 	
 	/**
