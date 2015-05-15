@@ -25,30 +25,28 @@
         android:id="@+id/check_correct_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/horizontalHint"
+        android:layout_below="@+id/gameGridView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:onClick="checkAnswerClick"
         android:text="Check Solution!" />
 
-    <TextView
-        android:id="@+id/horizontalHint"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/gameGridView"
         android:layout_alignRight="@+id/gameGridView"
-        android:layout_below="@+id/gameGridView"
-        android:text="Hint"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_below="@+id/gameGridView" >
 
-    <TextView
-        android:id="@+id/verticalHint"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/gameGridView"        
         android:layout_alignTop="@+id/gameGridView"
-        android:text="H\ni\nn\nt"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textSize="28sp"/>
+        android:layout_toRightOf="@+id/gameGridView"
+        android:layout_alignBottom="@+id/gameGridView"
+        android:orientation="vertical" >
+    </LinearLayout>
 
 </RelativeLayout>

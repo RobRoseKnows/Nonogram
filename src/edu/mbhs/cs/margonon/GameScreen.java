@@ -39,6 +39,8 @@ public class GameScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
 		createCellList(); // I'm wondering if the problem has to do with the way it's putting the values into cellList.
+		// TODO Handle errors if there's no grid.
+		
 		createHints();
 		
 		gameGrid = (GridView) findViewById(R.id.gameGridView);
@@ -54,21 +56,32 @@ public class GameScreen extends Activity {
 		});
 	}
 	
+	// TODO Set up this to return false when gridSolution is null and then make onCreate cease operations.
 	public void createHints() {
+		if(gridSolution == null) { 
+			Log.e("CREATE_HINTS", "No grid to put hints on.");
+			return;
+		}
 		
+		/* Test grid:
+		 * 
+		 * 1 0 1 0 1 | 1,1,1
+		 * 0 1 1 0 0 | 2
+		 * 1 1 0 0 0 | 2
+		 * 0 1 1 1 1 | 4
+		 * 0 1 1 0 1 | 2,1
+		 * ø ø ø ø ø
+		 * 1 4 2 1 1
+		 * 1   2   2
+		 */
+		
+		ArrayList<String> verticalHints = new ArrayList<String>();
+		ArrayList<String> horizontalHints = new ArrayList<String>();
+		
+		/*
 		String vh = "";
 		String hh = "";
 		
-		
-		if(gridSolution == null) { return; }
-		
-		/*
-		 * 1 0 1 0 1 
-		 * 0 1 1 0 0 
-		 * 1 1 0 0 0 
-		 * 0 1 1 1 1 
-		 * 0 1 1 0 1
-		 */
 		
 		for(int y = 0; y < gridSolution.length; y++) {
 			vh += "(";
@@ -93,7 +106,11 @@ public class GameScreen extends Activity {
 		
 		vview.setLines(rows);
 		vview.setText(vh);
-		hview.setText(hh);
+		hview.setText(hh);*/
+	}
+	
+	public void makeXHints() {
+		
 	}
 	
 	/**
