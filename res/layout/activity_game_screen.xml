@@ -49,6 +49,6 @@
         android:layout_alignTop="@+id/gameGridView"
         android:text="H\ni\nn\nt"
         android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textSize="32sp"/>
+        android:textSize="28sp"/>
 
 </RelativeLayout>
