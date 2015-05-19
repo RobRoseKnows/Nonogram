@@ -10,9 +10,11 @@ import java.util.List;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.AdapterView;
@@ -34,14 +36,15 @@ public class GameScreen extends Activity {
 	private String verHint = "";
 	private String horHint = "";
 	
+	private LinearLayout vertical;
+	private LinearLayout horizontal;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game_screen);
 		createCellList(); // I'm wondering if the problem has to do with the way it's putting the values into cellList.
 		// TODO Handle errors if there's no grid.
-		
-		createHints();
 		
 		gameGrid = (GridView) findViewById(R.id.gameGridView);
 		GameGridAdapter gameGridA = new GameGridAdapter(this, cellList, rows, cols);
@@ -54,6 +57,11 @@ public class GameScreen extends Activity {
 				refreshImageView(position);
 			}
 		});
+		
+		vertical = (LinearLayout) findViewById(R.id.vertical_hint_layout);
+		horizontal = (LinearLayout) findViewById(R.id.horizontal_hint_layout);
+		makeXHints();
+		makeYHints();
 	}
 	
 	// TODO Set up this to return false when gridSolution is null and then make onCreate cease operations.
@@ -74,43 +82,56 @@ public class GameScreen extends Activity {
 		 * 1 4 2 1 1
 		 * 1   2   2
 		 */
-		
-		ArrayList<String> verticalHints = new ArrayList<String>();
-		ArrayList<String> horizontalHints = new ArrayList<String>();
-		
-		/*
-		String vh = "";
-		String hh = "";
-		
-		
+	}
+	
+	public void makeXHints() {
+		String vh;
 		for(int y = 0; y < gridSolution.length; y++) {
-			vh += "(";
+			vh = "";
 			int cummulative = 0;
 			for(int x = 0; x < gridSolution[y].length; x++) {
 				cummulative += gridSolution[y][x];
 				if(gridSolution[y][x] == 0 && cummulative > 0) {
-					vh += " " + cummulative + ", ";
+					vh += " " + cummulative + " ";
 					cummulative = 0;
 				}
 			}
 			if(cummulative > 0){
-				vh += " " + cummulative + ", ";
+				vh += " " + cummulative + " ";
 			}
-			vh += ")\n";
+			
+			TextView tv = new TextView(GameScreen.this);
+			LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+			tv.setText(vh);
+			vertical.addView(tv, lp);
 		}
-		verHint = vh;
-		horHint = hh;
-		
-		TextView vview = (TextView) findViewById(R.id.verticalHint);
-		TextView hview = (TextView) findViewById(R.id.horizontalHint);
-		
-		vview.setLines(rows);
-		vview.setText(vh);
-		hview.setText(hh);*/
 	}
 	
-	public void makeXHints() {
+	public void makeYHints() {
+		String hh;
 		
+		// This does assume it's a rectangle, which is important to note.
+		for(int x = 0; x < gridSolution[0].length; x++) {
+			hh = "";
+			int cummulative = 0;
+			for(int y = 0; y < gridSolution.length; y++) {
+				cummulative += gridSolution[y][x];
+				if(gridSolution[y][x] == 0 && cummulative > 0) {
+					hh += cummulative + "\n";
+					cummulative = 0;
+				}
+			}
+			if(cummulative > 0) {
+				hh += cummulative + "\n";
+			}
+			
+			TextView tv = new TextView(GameScreen.this);
+			LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+			tv.setText(hh);
+			horizontal.addView(tv, lp);
+		}
 	}
 	
 	/**

@@ -68,7 +68,7 @@ public class GameGridAdapter extends BaseAdapter {
 		if(convertView == null) {
 			view = new ImageView(mContext);
 			view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-			view.setPadding(4, 4, 4, 4);
+			view.setPadding(1, 1, 1, 1);
 			view.setLayoutParams(new GridView.LayoutParams(48,48));
 		} else {
 			view = (ImageView) convertView;
