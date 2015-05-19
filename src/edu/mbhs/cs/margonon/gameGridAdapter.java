@@ -64,6 +64,7 @@ public class GameGridAdapter extends BaseAdapter {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		Log.d("GET_VIEW", "getView Called " + position);
 		ImageView view;
 		if(convertView == null) {
 			view = new ImageView(mContext);
@@ -88,6 +89,8 @@ public class GameGridAdapter extends BaseAdapter {
 			default:
 				Log.e("DRAWING", "display was set to invalid state");
 		} // end switch;
+		
+		
 		return view;
 	}
 	//TODO http://ocddevelopers.com/2014/extend-baseadapter-instead-of-arrayadapter-for-custom-list-items/

@@ -38,6 +38,7 @@ public class GameScreen extends Activity {
 	
 	private LinearLayout vertical;
 	private LinearLayout horizontal;
+	private boolean hintsDrawn = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,24 +66,29 @@ public class GameScreen extends Activity {
 	}
 	
 	// TODO Set up this to return false when gridSolution is null and then make onCreate cease operations.
-	public void createHints() {
-		if(gridSolution == null) { 
-			Log.e("CREATE_HINTS", "No grid to put hints on.");
+	public void redrawHints() {
+		if(hintsDrawn) {
+			Log.i("DRAW_HINTS", "Hints already drawn.");
 			return;
 		}
 		
-		/* Test grid:
-		 * 
-		 * 1 0 1 0 1 | 1,1,1
-		 * 0 1 1 0 0 | 2
-		 * 1 1 0 0 0 | 2
-		 * 0 1 1 1 1 | 4
-		 * 0 1 1 0 1 | 2,1
-		 * ø ø ø ø ø
-		 * 1 4 2 1 1
-		 * 1   2   2
-		 */
+		if(gameGrid.getChildCount() != cellList.size()) { 
+			Log.i("DRAW_HINTS", "Grid not complete.");
+			return;
+		}
 	}
+
+	/* Test grid:
+	 * 
+	 * 1 0 1 0 1 | 1,1,1
+	 * 0 1 1 0 0 | 2
+	 * 1 1 0 0 0 | 2
+	 * 0 1 1 1 1 | 4
+	 * 0 1 1 0 1 | 2,1
+	 * ø ø ø ø ø
+	 * 1 4 2 1 1
+	 * 1   2   2
+	 */
 	
 	public void makeXHints() {
 		String vh;
@@ -100,6 +106,7 @@ public class GameScreen extends Activity {
 				vh += " " + cummulative + " ";
 			}
 			
+			//Log.d("MAKE_HINTS", "gameGrid= " + gameGrid + " Child= " + gameGrid.getChildAt(0) + " Child count= " + gameGrid.getChildCount());
 			TextView tv = new TextView(GameScreen.this);
 			LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
