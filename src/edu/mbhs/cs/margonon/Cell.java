@@ -96,6 +96,11 @@ public class Cell {
 			display++;
 		correctNow = isCorrect();
 	}
+	
+	public void setDisplay(int d) {
+		display = d;
+		correctNow = isCorrect();
+	}
 
 	/**
 	 * Getter function for the willBeFull variable.

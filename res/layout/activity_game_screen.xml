@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="200dp"
         android:onClick="checkAnswerClick"
         android:text="Check Solution!" />
 
@@ -50,5 +50,15 @@
         android:orientation="vertical"
         android:id="@+id/vertical_hint_layout" >
     </LinearLayout>
+
+    <Button
+        android:id="@+id/clear_puzzle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:text="Clear Puzzle"
+        android:onClick="resetAnswerClick" />
 
 </RelativeLayout>

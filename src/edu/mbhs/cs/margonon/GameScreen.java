@@ -65,7 +65,7 @@ public class GameScreen extends Activity {
 		makeYHints();
 	}
 	
-	// TODO Set up this to return false when gridSolution is null and then make onCreate cease operations.
+	// TODO Set up this so that it redraws the hints post-grid drawing. Summer change.
 	public void redrawHints() {
 		if(hintsDrawn) {
 			Log.i("DRAW_HINTS", "Hints already drawn.");
@@ -90,6 +90,10 @@ public class GameScreen extends Activity {
 	 * 1   2   2
 	 */
 	
+	/**
+	 * Creates the vertical axis hints for the puzzle. Currently doesn't format them that well,
+	 *	TODO Make them look pretty in the summer
+	 */
 	public void makeXHints() {
 		String vh;
 		for(int y = 0; y < gridSolution.length; y++) {
@@ -115,6 +119,10 @@ public class GameScreen extends Activity {
 		}
 	}
 	
+	/**
+	 * Creates the horizontal axis hints for the puzzle. Currently doesn't format them that well,
+	 * TODO Make them look pretty in the summer
+	 */
 	public void makeYHints() {
 		String hh;
 		
@@ -162,6 +170,20 @@ public class GameScreen extends Activity {
 			Log.i("BUTTON_CLICK", "Puzzle is not solved!");
 			bv.setText("Incorrect! Click to check again!");
 		}
+	} // end public void checkAnswerClick(View v)
+	/**
+	 * Resets the puzzle's grid so that the puzzle can be solved again.
+	 * @param v The button clicked.
+	 */
+	public void resetAnswerClick(View v) {
+		for(int i = 0; i < cellList.size(); i++) {
+			cellList.get(i).setDisplay(0);
+			refreshImageView(i);
+		}
+		
+		Button bv = (Button) findViewById(R.id.check_correct_button);
+		Log.i("BUTTON_CLICK", "Puzzle is cleared!");
+		bv.setText("Check Solution");
 	} // end public void checkAnswerClick(View v)
 	
 	/**
